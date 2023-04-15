@@ -30,6 +30,7 @@ public class Page313 {
 			}
 		}
 		System.out.println(Math.min(cnt1, cnt2));
+		
 	}
 
 }

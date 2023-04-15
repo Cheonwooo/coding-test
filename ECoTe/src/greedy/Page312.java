@@ -24,8 +24,7 @@ public class Page312 {
 		}
 		
 		System.out.println(sum);
-		
-		
+
 	}
 
 }
