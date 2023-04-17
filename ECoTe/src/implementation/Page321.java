@@ -32,7 +32,7 @@ public class Page321 {
 			System.out.println("LUCKY");
 		} else {
 			System.out.println("READY");
-		}
+		} 
 		
 	}
 
