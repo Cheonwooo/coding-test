@@ -20,7 +20,6 @@ public class Ex1339 {
 			String str = br.readLine();
 			for(int j=0; j<str.length(); j++) {
 				arr[str.charAt(j)-65]+=Math.pow(10, str.length()-1-j);
-				System.out.println(arr[str.charAt(j)-65] + " " );
 			}
 		}
 		
