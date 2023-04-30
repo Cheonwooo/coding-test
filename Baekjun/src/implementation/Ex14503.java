@@ -84,13 +84,4 @@ public class Ex14503 {
 		ny = y + dy[d];
 		num++;
 	}
-	
-	public static boolean check() {
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<m; j++) {
-				if(arr[i][j]==0) return false;//아직 청소가 다 끝나지 않은 경우 false
-			}
-		}
-		return true;
-	}
 }
