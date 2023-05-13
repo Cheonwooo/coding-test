@@ -12,7 +12,7 @@ public class Page142 {
 	
 	public static void dfs(int x) {
 		visited[x] = true;
-		
+		System.out.print(x + " " );
 		for(int i=0; i<graph.get(x).size(); i++) {
 			int y = graph.get(x).get(i);
 			if(!visited[y]) dfs(y);

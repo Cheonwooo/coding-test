@@ -9,7 +9,7 @@ import java.util.Queue;
 	 */
 public class Page147 {
 	
-	public static boolean[] visited = new boolean[6];
+	public static boolean[] visited = new boolean[9];
 	public static ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
 
 	public static void bfs(int start) {
@@ -34,11 +34,11 @@ public class Page147 {
 	
 	
 	public static void main(String[] args) {
-		for(int i=0; i<6; i++) {
+		for(int i=0; i<9; i++) {
 			graph.add(new ArrayList<Integer>());
 		}
 		
-		graph.get(1).add(2);
+		/*graph.get(1).add(2);
 		graph.get(1).add(3);
 		graph.get(1).add(4);
 		
@@ -53,8 +53,8 @@ public class Page147 {
 		
 		graph.get(5).add(3);
 		
-		bfs(1);
-		/*graph.get(1).add(2);
+		bfs(1);*/
+		graph.get(1).add(2);
 		graph.get(1).add(3);
 		graph.get(1).add(8);
 		
@@ -80,7 +80,7 @@ public class Page147 {
 		graph.get(8).add(1);
 		graph.get(8).add(7);
 		
-		bfs(1);*/
+		bfs(1);
 	}
 
 }

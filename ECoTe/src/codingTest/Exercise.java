@@ -3,27 +3,60 @@ package codingTest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Exercise {
-	public static int n;
-	public static int[] arr;
+	public static int cnt;
+	public static String[] arr;
+	public static int max;
 	
-	public static void main(String[] args) throws IOException{//배열이 주어졌을때 3가지 수를 뽑는 경우의 수를 모두 출력
+	public static void main(String args[]) throws IOException{
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
+        int n = Integer.parseInt(br.readLine());
+        
+        for(int i=0; i<n; i++) {
+        	st = new StringTokenizer(br.readLine());
+        	arr = st.nextToken().split("");
+        	cnt = Integer.parseInt(st.nextToken());
+        	
+        	max = 0;
+        	if(cnt > arr.length) {
+        		cnt = arr.length;//num의 길이
+        	}
+        	
+        	dfs(0, 0);
+        	
+        	sb.append("#").append(i+1).append(" ").append(max).append("\n");
+        }
+        System.out.println(sb);
 		
-		
-
-			String str_num = br.readLine().replaceAll("[^0-9]", " ");
-			String[] str2_num = str_num.split(" ");
-			int num = 0;
-			for(int i=1; i<str2_num.length; i++) {
-				num += Integer.parseInt(str2_num[i])*(int)Math.pow(10, str2_num.length-1-i);
-			}
-		System.out.println(num);
-		
+        
+	}
+	public static void swap(int x, int y) {
+		String temp = arr[x];
+		arr[x] = arr[y];
+		arr[y] = temp;
 	}
 	
-	
+	public static void dfs(int start, int count) {
+		if(count == cnt) {
+			String result = "";
+			for(int i=0; i<arr.length; i++) {
+				result += arr[i];
+			}
+			max = Math.max(max, Integer.parseInt(result));
+			return;
+		}
+		
+		for(int i=0; i<arr.length; i++) {
+			for(int j=i+1; j<arr.length; j++) {
+				swap(i, j);
+				dfs(i, count + 1);
+				swap(i, j);
+			}
+		}
+	}
 }
