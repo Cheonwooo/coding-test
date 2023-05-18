@@ -3,67 +3,53 @@ package codingTest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Exercise {
-	public static int n, m;
-	public static ArrayList<ArrayList<Integer>> list;
-	public static int max;
-	public static boolean[] visited;
 
 	public static void main(String args[]) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder(); 
-		
-		int t = Integer.parseInt(br.readLine());
-		
-		for(int i=0; i<t; i++) {
-			int n = Integer.parseInt(br.readLine());
-			int[] arr = new int[n];
-			PriorityQueue<Integer> pq = new PriorityQueue<Integer>(Collections.reverseOrder());
 			
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			for(int j=0; j<n; j++) {
-				arr[j] = Integer.parseInt(st.nextToken());
-			}
-			
-			for(int j=0; j<arr.length-1; j++) {
-				for(int k=j+1; k<arr.length; k++) {
-					int sum = arr[j] * arr[k];
-					
-					if(!check(sum)) {//단조증가수라면
-						pq.add(sum);
+		for(int i=0; i<10; i++) {
+			int test_case = Integer.parseInt(br.readLine());
+			int[][] arr = new int[100][100];
+			int finish_x = 0;
+			int finish_y = 0;
+			for(int j=0; j<100; j++) {
+				StringTokenizer st = new StringTokenizer(br.readLine());
+				for(int k=0; k<100; k++) {
+					arr[j][k] = Integer.parseInt(st.nextToken());
+					if(arr[j][k]==2) {
+						finish_x = j;
+						finish_y = k;
 					}
 				}
-			}	
-			if(pq.size()==0) {
-				sb.append("#").append(i+1).append(" ").append(-1).append("\n");
-			} else {
-				sb.append("#").append(i+1).append(" ").append(pq.poll()).append("\n");
 			}
-			
+			int[] dx = {0, 0, -1};
+			int[] dy = {-1, 1, 0};
+			while(finish_x!=0) {//arr[x][0]이 될 때 까지 역으로 올라가기
+				for(int j=0; j<3; j++) {
+					int nx = finish_x + dx[j];
+					int ny = finish_y + dy[j];
+					
+					if(nx<=-1 || nx>=100 || ny<=-1 || ny>=100) {
+						continue;
+					}
+					
+					if(arr[nx][ny]==1) {
+						arr[nx][ny] = 0;
+						finish_x = nx;
+						finish_y = ny;
+						break;
+					}
+				}
+			}
+			sb.append("#").append(test_case).append(" ").append(finish_y).append("\n");
 		}
 		System.out.println(sb);
-	}
-	
-	public static boolean check(int x) {
-		String str = String.valueOf(x);
-		int[] arr = new int[str.length()];
-		boolean check = false;
-		
-		for(int i=0; i<arr.length; i++) {
-			arr[i] = (int)(str.charAt(i)-'0');
-		}
-		
-		for(int i=0; i<arr.length-1; i++) {
-			if(arr[i] > arr[i+1]) {
-				check = true;
-				break;
-			}
-		}
-		return check;
 	}
 }
