@@ -3,53 +3,81 @@ package codingTest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Exercise {
+	public static int n;
+	public static int[] arr, answer;
+	public static boolean[] visited;
 
 	public static void main(String args[]) throws IOException{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder(); 
-			
-		for(int i=0; i<10; i++) {
-			int test_case = Integer.parseInt(br.readLine());
-			int[][] arr = new int[100][100];
-			int finish_x = 0;
-			int finish_y = 0;
-			for(int j=0; j<100; j++) {
-				StringTokenizer st = new StringTokenizer(br.readLine());
-				for(int k=0; k<100; k++) {
-					arr[j][k] = Integer.parseInt(st.nextToken());
-					if(arr[j][k]==2) {
-						finish_x = j;
-						finish_y = k;
-					}
-				}
-			}
-			int[] dx = {0, 0, -1};
-			int[] dy = {-1, 1, 0};
-			while(finish_x!=0) {//arr[x][0]이 될 때 까지 역으로 올라가기
-				for(int j=0; j<3; j++) {
-					int nx = finish_x + dx[j];
-					int ny = finish_y + dy[j];
-					
-					if(nx<=-1 || nx>=100 || ny<=-1 || ny>=100) {
-						continue;
-					}
-					
-					if(arr[nx][ny]==1) {
-						arr[nx][ny] = 0;
-						finish_x = nx;
-						finish_y = ny;
-						break;
-					}
-				}
-			}
-			sb.append("#").append(test_case).append(" ").append(finish_y).append("\n");
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		
+		n = Integer.parseInt(br.readLine());
+		arr = new int[n];
+		answer = new int[3];
+		visited = new boolean[n];
+		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
-		System.out.println(sb);
+		permutation(0);
+		combination(0, 0);
+		subset(0);
+	}
+	
+	public static void permutation(int idx) {
+		if(idx == answer.length) {
+			for(int i=0; i<answer.length; i++) {
+				System.out.print(answer[i] + " " );
+			}
+			System.out.println();
+			return;
+		}
+		
+		for(int i=0; i<arr.length;i++) {
+			if(!visited[i]) {
+				answer[idx] = arr[i];
+				
+				visited[i] = true;
+				permutation(idx + 1);
+				visited[i] = false;
+			}
+		}
+	}
+	
+	public static void combination(int arridx, int idx) {
+		if(idx==answer.length) {
+			for(int i=0; i<answer.length; i++) {
+				System.out.print(answer[i] + " " );
+			}
+			System.out.println();
+			return;
+		}
+		
+		if(arridx==arr.length) return;
+		
+		answer[idx] = arr[arridx];
+		
+		combination(arridx+1 , idx+1);
+		combination(arridx+1 , idx);
+	}
+	
+	public static void subset(int idx) {
+		if(idx == arr.length) {
+			for(int i=0; i<arr.length; i++) {
+				if(visited[i]) {
+					System.out.print(arr[i] + " ");
+				}
+			}
+			System.out.println();
+			return;
+		}
+		
+		visited[idx] = true;
+		subset(idx + 1);
+		visited[idx] = false;
+		subset(idx + 1);
 	}
 }

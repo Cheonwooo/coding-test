@@ -55,7 +55,9 @@ public class Page152 {
 	public static int bfs(int x, int y) {
 		q.add(new Pair(x, y));
 		
+		
 		while(!q.isEmpty()) {
+			
 			Pair cur = q.poll();
 			x = cur.x;
 			y = cur.y;

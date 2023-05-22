@@ -17,6 +17,7 @@ public class Page147 {
 		q.offer(start);
 		visited[start] = true;
 		
+		
 		while(!q.isEmpty()) {
 			int x = q.poll();
 							
