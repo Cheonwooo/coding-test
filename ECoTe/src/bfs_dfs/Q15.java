@@ -66,7 +66,5 @@ public class Q15 {
 		if(!check) sb.append(-1);
 		
 		System.out.println(sb);
-		
-		
 	}
 }
