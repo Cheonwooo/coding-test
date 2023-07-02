@@ -12,14 +12,36 @@ public class Exercise2 {
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		System.out.println(gcd(162, 192));
+		int n = Integer.parseInt(br.readLine());
+		int[] arr = new int[n];
+		boolean[] visited = new boolean[n];
+		int[] output = new int[n];
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		for(int i=0; i<n; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		comb(arr, output, visited, 0, n, 5);
+			
 	}
 	
-	public static int gcd(int a, int b) {
-		if(a%b==0) {
-			return b;
-		} else {
-			return gcd(b, a%b);
+	public static void comb(int[] arr, int[] output,boolean[] visited, int depth, int n, int r) {
+		if(depth == r) {
+			for(int i=0; i<r; i++) {
+				System.out.print(output[i] + " " );
+			}
+			System.out.println();
+			return;
+		}
+			
+		for(int i=0; i<n; i++) {
+			if(!visited[i]) {
+				visited[i] = true;
+				output[depth] = arr[i];
+				comb(arr, output, visited, depth+1, n, r);
+				visited[i] = false;
+			}
 		}
 	}
 }
