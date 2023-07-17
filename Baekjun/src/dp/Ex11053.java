@@ -13,29 +13,27 @@ public class Ex11053 {
 		
 		int n = Integer.parseInt(br.readLine());
 		int[] arr = new int[n];
-		int[] list = new int[n];
-		
+		int[] d = new int[n];
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
+		
 		for(int i=0; i<n; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
+		d[0] = 1;
 		for(int i=1; i<n; i++) {
-			boolean[] check = new boolean[1001];
-			int min = arr[i];
-			int cnt = 1;
-			for(int j=i-1; j>=0; j--) {
-				if(min > arr[j] && !check[arr[j]]) {
-					check[arr[j]] = true;
-					min = arr[j];
-					cnt++;
+			d[i] = 1;
+				for(int j=0; j<i; j++){
+					if(arr[j] < arr[i] && d[i] <= d[j]) {
+						d[i] = d[j] + 1;
 				}
 			}
-			list[i] = cnt;
 		}
-		Arrays.sort(list);
-		System.out.println(list[list.length-1]);
+		int max = 0;
+		for(int v : d) {
+			max = Math.max(max, v);
+		}
+		System.out.println(max);
 	}
-
 }
