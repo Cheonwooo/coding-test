@@ -24,7 +24,7 @@ public class Page149 {
 				arr[i][j] = str.charAt(j)-'0';
 			}
 		}
-		cnt = 1;
+		cnt = 0;
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<m; j++) {
 				if(dfs(i, j)) cnt++;
@@ -46,8 +46,8 @@ public class Page149 {
 			return false;
 		}
 		
-		if(arr[x][y]==0) {
-			arr[x][y]=cnt;
+		if(arr[x][y]!=0) {
+			arr[x][y]=0;
 			
 			dfs(x-1, y);
 			dfs(x, y-1);
