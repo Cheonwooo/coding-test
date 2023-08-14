@@ -97,7 +97,6 @@ public class Ex2636 {
 				if(map[i][j]==1) cnt++;
 			}
 		}
-		
 		return cnt;
 	}
 	
